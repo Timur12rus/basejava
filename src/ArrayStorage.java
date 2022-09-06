@@ -6,7 +6,7 @@ public class ArrayStorage {
     Resume[] storage = new Resume[10000];
 
     void clear() {
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
         size = 0;
@@ -31,13 +31,13 @@ public class ArrayStorage {
             if ((storage[i].uuid).equals(uuid) && (uuid != null)) {
                 storage[i] = null;
 
-                for (int j = i; j < storage.length - 1; j++) {
-                    storage[i] = storage[i + 1];
+                for (int j = i; j < size - 1; j++) {
+                    storage[j] = storage[j + 1];
                 }
+                storage[size - 1] = null;
                 if (size > 0) {
                     size--;
                 }
-                storage[storage.length - 1] = null;
                 break;
             }
         }
