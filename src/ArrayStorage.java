@@ -1,30 +1,25 @@
-import java.util.Arrays;
-import java.util.Comparator;
-
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
+    private int size = 0;
     Resume[] storage = new Resume[10000];
 
     void clear() {
         for (int i = 0; i < 10000; i++) {
             storage[i] = null;
         }
+        size = 0;
     }
 
     void save(Resume r) {
-        for (int i = 0; i < 10000; i++) {
-            if (storage[i] == null) {
-                storage[i] = r;
-                break;
-            }
-        }
+        storage[size] = r;
+        size++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < 10000; i++) {
-            if (storage[i] != null && storage[i].uuid == uuid) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].uuid == uuid) {
                 return storage[i];
             }
         }
@@ -32,21 +27,19 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        try {
-            int k = 0;
-            for (int i = 0; i < 10000; i++) {
-                if (uuid == storage[i].uuid) {
-                    storage[i] = null;
-                    k = i;
-                    break;
-                }
-            }
-            for (int i = k; i < storage.length - 1; i++) {
-                storage[i] = storage[i + 1];
-            }
-            storage[storage.length - 1] = null;
-        } catch (NullPointerException e) {
+        for (int i = 0; i < size; i++) {
+            if ((storage[i].uuid).equals(uuid) && (uuid != null)) {
+                storage[i] = null;
 
+                for (int j = i; j < storage.length - 1; j++) {
+                    storage[i] = storage[i + 1];
+                }
+                if (size > 0) {
+                    size--;
+                }
+                storage[storage.length - 1] = null;
+                break;
+            }
         }
     }
 
@@ -54,14 +47,6 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        int size = 0;
-        for (int i = 0; i < 10000; i++) {
-            if (storage[i] != null) {
-                size++;
-            } else {
-                break;
-            }
-        }
         Resume[] array = new Resume[size];
         for (int i = 0; i < size; i++) {
             array[i] = storage[i];
@@ -70,14 +55,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        int resumeCount = 0;
-        for (int i = 0; i < 10000; i++) {
-            if (storage[i] != null) {
-                resumeCount++;
-            } else {
-                break;
-            }
-        }
-        return resumeCount;
+        return size;
     }
 }
