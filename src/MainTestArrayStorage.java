@@ -1,5 +1,6 @@
 import model.Resume;
 import storage.ArrayStorage;
+import storage.SortedArrayStorage;
 import storage.Storage;
 
 import java.util.Arrays;
@@ -8,15 +9,15 @@ import java.util.Arrays;
  * Test for your storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    static final Storage ARRAY_STORAGE = new ArrayStorage();
+    static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
-        r1.setUuid("uuid1");
+        r1.setUuid("5");
         Resume r2 = new Resume();
-        r2.setUuid("uuid2");
+        r2.setUuid("8");
         Resume r3 = new Resume();
-        r3.setUuid("uuid3");
+        r3.setUuid("2");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
@@ -27,9 +28,17 @@ public class MainTestArrayStorage {
 
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
-//        System.out.println("Index of r2: " + Arrays.binarySearch(ARRAY_STORAGE.storage, 0, ARRAY_STORAGE.size(), r2));
+        printAll();
+
+        //---------------------
+        Resume r5 = new Resume();
+        r5.setUuid("7");
+        ARRAY_STORAGE.save(r5);
 
         printAll();
+
+        //--------------------
+
         ARRAY_STORAGE.delete(r1.getUuid());
         printAll();
         ARRAY_STORAGE.update(r3);
