@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AbstractArrayStorageTest {
+public abstract class AbstractArrayStorageTest {
     private Storage storage;
 
     public static final String UUID_1 = "uuid1";
@@ -51,7 +51,7 @@ public class AbstractArrayStorageTest {
     @Test
     public void update() throws Exception {
         Resume newResume = new Resume(UUID_1);
-        storage.save(newResume);
+        storage.update(newResume);
         assertTrue(newResume == storage.get(UUID_1));
     }
 
@@ -98,7 +98,7 @@ public class AbstractArrayStorageTest {
     public void delete() throws Exception {
         storage.delete(UUID_1);
         assertSize(2);
-        storage.delete(UUID_1);
+        storage.get(UUID_1);
     }
 
     @Test(expected = NotExistStorageException.class)

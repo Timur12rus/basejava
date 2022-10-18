@@ -10,7 +10,7 @@ import java.util.Arrays;
 public abstract class AbstractArrayStorage implements Storage {
     protected static final int STORAGE_LIMIT = 10000;
 
-    protected final Resume[] storage = new Resume[STORAGE_LIMIT];
+    protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
     public void clear() {
@@ -64,10 +64,6 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public int size() {
         return size;
-    }
-
-    protected void printError(String uuid) {
-        System.out.println("ERROR! Resume with uuid = " + uuid + " not present!");
     }
 
     protected abstract int getIndex(String uuid);
