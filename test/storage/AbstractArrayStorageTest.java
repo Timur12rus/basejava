@@ -57,7 +57,6 @@ public abstract class AbstractArrayStorageTest {
     public void update() throws Exception {
         Resume newResume = new Resume(UUID_1);
         STORAGE.update(newResume);
-        assertTrue(newResume == STORAGE.get(UUID_1));
         assertSame(newResume, STORAGE.get(UUID_1));
     }
 
@@ -91,7 +90,7 @@ public abstract class AbstractArrayStorageTest {
     public void saveOverflow() throws Exception {
         STORAGE.clear();
         try {
-            for (int i = 4; i <= STORAGE_LIMIT; i++) {
+            for (int i = 0; i < STORAGE_LIMIT; i++) {
                 STORAGE.save(new Resume());
             }
         } catch (StorageException e) {
